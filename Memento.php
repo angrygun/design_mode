@@ -4,6 +4,7 @@
  * User: coder meng
  * Date: 2016/8/26 14:41
  */
+
 /*
  * 备忘录模式
  *
@@ -12,62 +13,62 @@
 
 class Memento
 {
-	private $_state = null;
+    private $_state = null;
 
-	public function __construct($state)
-	{
-		$this->_state = $state;
-	}
+    public function __construct($state)
+    {
+        $this->_state = $state;
+    }
 
-	public function getState()
-	{
-		return $this->_state;
-	}
+    public function getState()
+    {
+        return $this->_state;
+    }
 }
 
 class Caretaker
 {
-	private $_memento = null;
+    private $_memento = null;
 
-	public function getMemento()
-	{
-		return $this->_memento;
-	}
+    public function getMemento()
+    {
+        return $this->_memento;
+    }
 
-	public function setMemento($memento)
-	{
-		$this->_memento = $memento;
-	}
+    public function setMemento($memento)
+    {
+        $this->_memento = $memento;
+    }
 }
 
 class Originator
 {
-	private $_state = null;
+    private $_state = null;
 
-	public function getState()
-	{
-		return $this->_state;
-	}
+    public function getState()
+    {
+        return $this->_state;
+    }
 
-	public function setState($state)
-	{
-		$this->_state = $state;
-	}
+    public function setState($state)
+    {
+        $this->_state = $state;
+    }
 
-	public function createMemento()
-	{
-		return new Memento($this->_state);
-	}
+    public function createMemento()
+    {
+        return new Memento($this->_state);
+    }
 
-	public function setMemento($memento)
-	{
-		$this->_state = $memento->getState();
-	}
+    public function setMemento($memento)
+    {
+        $this->_state = $memento->getState();
+    }
 
-	public function display()
-	{
-		echo 'state=' . $this->_state . '<br/>';
-	}
+    public function display()
+    {
+        echo 'state=' . $this->_state . '<br/>';
+    }
 }
 
 $objOriginator = new Originator();

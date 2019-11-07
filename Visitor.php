@@ -4,6 +4,7 @@
  * User: coder meng
  * Date: 2016/8/25 9:41
  */
+
 /*
  * 访问者模式
  *
@@ -12,80 +13,80 @@
 
 abstract class Visitor
 {
-	abstract public function visitCroncreteElementA($element);
+    abstract public function visitCroncreteElementA($element);
 
-	abstract public function visitCroncreteElementB($element);
+    abstract public function visitCroncreteElementB($element);
 }
 
 class ConcreteVisitor1 extends Visitor
 {
-	public function visitCroncreteElementA($element)
-	{
-		echo get_class($element) . 'visit 1A<br/>';
-	}
+    public function visitCroncreteElementA($element)
+    {
+        echo get_class($element) . 'visit 1A<br/>';
+    }
 
-	public function visitCroncreteElementB($element)
-	{
-		echo get_class($element) . 'visit 1B<br/>';
-	}
+    public function visitCroncreteElementB($element)
+    {
+        echo get_class($element) . 'visit 1B<br/>';
+    }
 }
 
 class ConcreteVisitor2 extends Visitor
 {
-	public function visitCroncreteElementA($element)
-	{
-		echo get_class($element) . 'visit 2A<br/>';
-	}
+    public function visitCroncreteElementA($element)
+    {
+        echo get_class($element) . 'visit 2A<br/>';
+    }
 
-	public function visitCroncreteElementB($element)
-	{
-		echo get_class($element) . 'visit 2B<br/>';
-	}
+    public function visitCroncreteElementB($element)
+    {
+        echo get_class($element) . 'visit 2B<br/>';
+    }
 }
 
 abstract class Element
 {
-	abstract public function accept($visitor);
+    abstract public function accept($visitor);
 }
 
 class ConcreteElementA extends Element
 {
-	public function accept($visitor)
-	{
-		$visitor->visitCroncreteElementA($this);
-	}
+    public function accept($visitor)
+    {
+        $visitor->visitCroncreteElementA($this);
+    }
 }
 
 class ConcreteElementB extends Element
 {
-	public function accept($visitor)
-	{
-		$visitor->visitCroncreteElementB($this);
-	}
+    public function accept($visitor)
+    {
+        $visitor->visitCroncreteElementB($this);
+    }
 }
 
 class ObjectStructure
 {
-	private $_element = array();
+    private $_element = array();
 
-	public function attach($element)
-	{
-		$this->_element[] = $element;
-	}
+    public function attach($element)
+    {
+        $this->_element[] = $element;
+    }
 
-	public function detach($element)
-	{
-		if ($key = array_search($element, $this->_element) !== false) {
-			unset($this->_element[$key]);
-		}
-	}
+    public function detach($element)
+    {
+        if ($key = array_search($element, $this->_element) !== false) {
+            unset($this->_element[$key]);
+        }
+    }
 
-	public function accept($visitor)
-	{
-		foreach ($this->_element as $element) {
-			$element->accept($visitor);
-		}
-	}
+    public function accept($visitor)
+    {
+        foreach ($this->_element as $element) {
+            $element->accept($visitor);
+        }
+    }
 }
 
 $objOS = new ObjectStructure();

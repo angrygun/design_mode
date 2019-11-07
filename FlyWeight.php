@@ -4,6 +4,7 @@
  * User: coder meng
  * Date: 2016/9/3 17:48
  */
+
 /*
  * 享元模式
  *
@@ -12,64 +13,65 @@
 
 class CD
 {
-	private $_title = null;
-	private $_artist = null;
+    private $_title = null;
+    private $_artist = null;
 
-	public function setTitle($title)
-	{
-		$this->_title = $title;
-	}
+    public function setTitle($title)
+    {
+        $this->_title = $title;
+    }
 
-	public function getTitle()
-	{
-		return $this->_title;
-	}
+    public function getTitle()
+    {
+        return $this->_title;
+    }
 
-	public function setArtist($artist)
-	{
-		$this->_artist = $artist;
-	}
+    public function setArtist($artist)
+    {
+        $this->_artist = $artist;
+    }
 
-	public function getArtist()
-	{
-		return $this->_artist;
-	}
+    public function getArtist()
+    {
+        return $this->_artist;
+    }
 }
 
 class Artist
 {
-	private $_name;
+    private $_name;
 
-	public function __construct($name)
-	{
-		echo 'construct' . $name . '<br/>';
-		$this->_name = $name;
-	}
+    public function __construct($name)
+    {
+        echo 'construct' . $name . '<br/>';
+        $this->_name = $name;
+    }
 
-	public function getName()
-	{
-		return $this->_name;
-	}
+    public function getName()
+    {
+        return $this->_name;
+    }
 }
 
 class ArtistFactory
 {
-	private $_artists = array();
+    private $_artists = array();
 
-	public function getArtist($name)
-	{
-		if (isset($this->_artists[$name])) {
-			return $this->_artists[$name];
-		} else {
-			$objArtist = new Artist($name);
-			$this->_artists[$name] = $objArtist;
-			return $objArtist;
-		}
-	}
+    public function getArtist($name)
+    {
+        if (isset($this->_artists[$name])) {
+            return $this->_artists[$name];
+        } else {
+            $objArtist             = new Artist($name);
+            $this->_artists[$name] = $objArtist;
+
+            return $objArtist;
+        }
+    }
 }
 
 $objArtistFactory = new ArtistFactory();
-$objCD1 = new CD();
+$objCD1           = new CD();
 $objCD1->setTitle('title1');
 $objCD1->setArtist($objArtistFactory->getArtist('artist1'));
 

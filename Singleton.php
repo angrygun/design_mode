@@ -4,6 +4,7 @@
  * User: coder meng
  * Date: 2016/8/20 15:12
  */
+
 /*
  * 单例模式
  *
@@ -12,24 +13,25 @@
 
 class Singleton
 {
-	static private $_instance = null;
+    static private $_instance = null;
 
-	private function __construct()
-	{
-	}
+    private function __construct()
+    {
+    }
 
-	static public function getInstance()
-	{
-		if (is_null(self::$_instance)) {
-			self::$_instance = new Singleton();
-		}
-		return self::$_instance;
-	}
+    static public function getInstance()
+    {
+        if (is_null(self::$_instance)) {
+            self::$_instance = new Singleton();
+        }
 
-	public function display()
-	{
-		echo 'It is a singleton class function';
-	}
+        return self::$_instance;
+    }
+
+    public function display()
+    {
+        echo 'It is a singleton class function';
+    }
 }
 
 //$obj=new Singleton();//实例化不能成功

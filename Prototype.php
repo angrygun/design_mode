@@ -4,6 +4,7 @@
  * User: coder meng
  * Date: 2016/8/26 16:55
  */
+
 /*
  * 原型模式
  *
@@ -12,27 +13,27 @@
 
 abstract class Prototype
 {
-	private $_id = null;
+    private $_id = null;
 
-	public function __construct($id)
-	{
-		$this->_id = $id;
-	}
+    public function __construct($id)
+    {
+        $this->_id = $id;
+    }
 
-	public function getID()
-	{
-		return $this->_id;
-	}
+    public function getID()
+    {
+        return $this->_id;
+    }
 
-	public function __clone()
-	{//magic function
-		$this->_id += 1;
-	}
+    public function __clone()
+    {//magic function
+        $this->_id += 1;
+    }
 
-	public function getClone()
-	{
-		return clone $this;
-	}
+    public function getClone()
+    {
+        return clone $this;
+    }
 }
 
 class ConcretePrototype extends Prototype
@@ -40,7 +41,7 @@ class ConcretePrototype extends Prototype
 
 }
 
-$objPrototype = new Concreteprototype(0);
+$objPrototype  = new Concreteprototype(0);
 $objPrototype1 = clone $objPrototype;
 echo $objPrototype1->getID() . '<br/>';
 $objPrototype2 = $objPrototype;

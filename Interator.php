@@ -4,6 +4,7 @@
  * User: coder meng
  * Date: 2016/9/6 15:47
  */
+
 /*
  * 迭代器模式
  *
@@ -12,43 +13,43 @@
 
 interface Interator
 {
-	public function next();
+    public function next();
 
-	public function first();
+    public function first();
 
-	public function current();
+    public function current();
 
-	public function isDone();
+    public function isDone();
 }
 
 class SomeInterator implements Interator
 {
-	private $_arr = array();
+    private $_arr = array();
 
-	public function __construct($arr)
-	{
-		$this->_arr = $arr;
-	}
+    public function __construct($arr)
+    {
+        $this->_arr = $arr;
+    }
 
-	public function first()
-	{
-		return $this->_arr[0];
-	}
+    public function first()
+    {
+        return $this->_arr[0];
+    }
 
-	public function current()
-	{
-		return current($this->_arr);
-	}
+    public function current()
+    {
+        return current($this->_arr);
+    }
 
-	public function next()
-	{
-		return next($this->_arr);
-	}
+    public function next()
+    {
+        return next($this->_arr);
+    }
 
-	public function isDone()
-	{
+    public function isDone()
+    {
 
-	}
+    }
 }
 
 $objSomeInterator = new SomeInterator(array(1, 2, 3, 4, 6, 7));

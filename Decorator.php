@@ -14,19 +14,19 @@ header('Content-type:text/html;charset=utf-8');
 
 abstract class MessageBoardHandler
 {
-	public function __construct()
-	{
-	}
+    public function __construct()
+    {
+    }
 
-	abstract public function filter($msg);
+    abstract public function filter($msg);
 }
 
 class MessageBoard extends MessageBoardHandler
 {
-	public function filter($msg)
-	{
-		return '处理留言板上的内容|' . $msg;
-	}
+    public function filter($msg)
+    {
+        return '处理留言板上的内容|' . $msg;
+    }
 }
 
 $obj = new MessageBoard();
@@ -36,48 +36,49 @@ echo $obj->filter('一定要学好装饰模式<br/>');
 
 class MessageBoardDecorator extends MessageBoardHandler
 {
-	private $_handler = null;
+    private $_handler = null;
 
-	public function __construct($handler)
-	{
-		parent::__construct();
-		$this->_handler = $handler;
-	}
+    public function __construct($handler)
+    {
+        parent::__construct();
+        $this->_handler = $handler;
+    }
 
-	public function filter($msg)
-	{
-		return $this->_handler->filter($msg);
-	}
+    public function filter($msg)
+    {
+        return $this->_handler->filter($msg);
+    }
 }
 
 //过滤html
 
 class HtmlFilter extends MessageBoardDecorator
 {
-	public function __construct($handler)
-	{
-		parent::__construct($handler);
-	}
+    public function __construct($handler)
+    {
+        parent::__construct($handler);
+    }
 
-	public function filter($msg)
-	{
-		return '过滤掉HTML标签|' . parent::filter($msg);//过滤掉HTML标签的处理 这时只是加个文字 没有进行处理
-	}
+    public function filter($msg)
+    {
+        return '过滤掉HTML标签|'
+            . parent::filter($msg);//过滤掉HTML标签的处理 这时只是加个文字 没有进行处理
+    }
 }
 
 //过滤敏感字
 
 class SensitiveFilter extends MessageBoardDecorator
 {
-	public function __construct($handler)
-	{
-		parent::__construct($handler);
-	}
+    public function __construct($handler)
+    {
+        parent::__construct($handler);
+    }
 
-	public function filter($msg)
-	{
-		return '过滤掉敏感字|' . parent::filter($msg);//过滤掉敏感字的处理 这时只是加个文字 没有进行处理
-	}
+    public function filter($msg)
+    {
+        return '过滤掉敏感字|' . parent::filter($msg);//过滤掉敏感字的处理 这时只是加个文字 没有进行处理
+    }
 }
 
 $obj = new HtmlFilter(new SensitiveFilter(new MessageBoard()));

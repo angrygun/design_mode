@@ -13,100 +13,100 @@
 //以下是一系列算法的封闭
 interface CacheTable
 {
-	public function get($key);
+    public function get($key);
 
-	public function set($key, $value);
+    public function set($key, $value);
 
-	public function del($key);
+    public function del($key);
 }
 
 //不使用缓存
 class NoCache implements CacheTable
 {
-	public function __construct()
-	{
-		echo 'Use NoCache<br/>';
-	}
+    public function __construct()
+    {
+        echo 'Use NoCache<br/>';
+    }
 
-	public function get($key)
-	{
-		return false;
-	}
+    public function get($key)
+    {
+        return false;
+    }
 
-	public function set($key, $value)
-	{
-		return true;
-	}
+    public function set($key, $value)
+    {
+        return true;
+    }
 
-	public function del($key)
-	{
-		return false;
-	}
+    public function del($key)
+    {
+        return false;
+    }
 }
 
 //文件缓存
 class FileCache implements Cachetable
 {
-	public function __construct()
-	{
-		echo 'Use FileCache<br/>';//文件缓存构造函数
-	}
+    public function __construct()
+    {
+        echo 'Use FileCache<br/>';//文件缓存构造函数
+    }
 
-	public function get($key)
-	{
-		//文件缓存的get方法实现
-	}
+    public function get($key)
+    {
+        //文件缓存的get方法实现
+    }
 
-	public function set($key, $value)
-	{
-		//文件缓存的set方法实现
-	}
+    public function set($key, $value)
+    {
+        //文件缓存的set方法实现
+    }
 
-	public function del($key)
-	{
-		//文件缓存的del方法实现
-	}
+    public function del($key)
+    {
+        //文件缓存的del方法实现
+    }
 }
 
 //TTServer
 class TTCache implements CacheTable
 {
-	public function __construct()
-	{
-		echo 'Use TTCache<br/>';//TTServer缓存构造函数
-	}
+    public function __construct()
+    {
+        echo 'Use TTCache<br/>';//TTServer缓存构造函数
+    }
 
-	public function get($key)
-	{
-		//TTCache缓存的get方法实现
-	}
+    public function get($key)
+    {
+        //TTCache缓存的get方法实现
+    }
 
-	public function set($key, $value)
-	{
-		//TTCache缓存的set方法实现
-	}
+    public function set($key, $value)
+    {
+        //TTCache缓存的set方法实现
+    }
 
-	public function del($key)
-	{
-		//TTCache换粗的del方法实现
-	}
+    public function del($key)
+    {
+        //TTCache换粗的del方法实现
+    }
 }
 
 //以下是使用不用缓存的策略
 
 class Model
 {
-	private $_cache;
+    private $_cache;
 
-	public function __construct()
-	{
-		$this->_cache = new NoCache();
-	}
+    public function __construct()
+    {
+        $this->_cache = new NoCache();
+    }
 
-	public function setCache($cache)
-	{
-		$this->_cache = $cache;
-	}
+    public function setCache($cache)
+    {
+        $this->_cache = $cache;
+    }
 }
 
 class UserModel extends Model
@@ -116,13 +116,13 @@ class UserModel extends Model
 
 class ProductModel extends Model
 {
-	public function __construct()
-	{
-		$this->_cache = new TTCache();
-	}
+    public function __construct()
+    {
+        $this->_cache = new TTCache();
+    }
 }
 
 //实例以下
-$mdlUser = new UserModel();
+$mdlUser    = new UserModel();
 $mdlProduct = new ProductModel();
 $mdlProduct->setCache(new FileCache());//改变策略

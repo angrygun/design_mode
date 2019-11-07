@@ -4,6 +4,7 @@
  * User: coder meng
  * Date: 2016/8/18 14:49
  */
+
 /*
  * 建造者模式
  *
@@ -12,33 +13,33 @@
 
 class Product
 {
-	public $_type = null;
-	public $_size = null;
-	public $_color = null;
+    public $_type = null;
+    public $_size = null;
+    public $_color = null;
 
-	public function setType($type)
-	{
-		echo 'set product type<br/>';
-		$this->_type = $type;
-	}
+    public function setType($type)
+    {
+        echo 'set product type<br/>';
+        $this->_type = $type;
+    }
 
-	public function setSize($size)
-	{
-		echo 'set product size<br/>';
-		$this->_size = $size;
-	}
+    public function setSize($size)
+    {
+        echo 'set product size<br/>';
+        $this->_size = $size;
+    }
 
-	public function setColor($color)
-	{
-		echo 'set product color<br/>';
-		$this->_color = $color;
-	}
+    public function setColor($color)
+    {
+        echo 'set product color<br/>';
+        $this->_color = $color;
+    }
 }
 
 $config = array(
-	'type' => 'shirt',
-	'size' => 'xl',
-	'color' => 'red'
+    'type'  => 'shirt',
+    'size'  => 'xl',
+    'color' => 'red',
 );
 
 //没有使用builder以前的处理
@@ -53,27 +54,27 @@ $oProduct->setColor($config['color']);
 
 class ProductBuilder
 {
-	public $_config = null;
-	public $_object = null;
+    public $_config = null;
+    public $_object = null;
 
-	public function ProductBuilder($config)
-	{
-		$this->_object = new Product();
-		$this->_config = $config;
-	}
+    public function ProductBuilder($config)
+    {
+        $this->_object = new Product();
+        $this->_config = $config;
+    }
 
-	public function build()
-	{
-		echo '--- in builder ---<br/>';
-		$this->_object->setType($this->_config['type']);
-		$this->_object->setSize($this->_config['size']);
-		$this->_object->setColor($this->_config['color']);
-	}
+    public function build()
+    {
+        echo '--- in builder ---<br/>';
+        $this->_object->setType($this->_config['type']);
+        $this->_object->setSize($this->_config['size']);
+        $this->_object->setColor($this->_config['color']);
+    }
 
-	public function getProduct()
-	{
-		return $this->_object;
-	}
+    public function getProduct()
+    {
+        return $this->_object;
+    }
 }
 
 $objBuilder = new ProductBuilder($config);

@@ -4,6 +4,7 @@
  * User: coder meng
  * Date: 2016/9/5 14:44
  */
+
 /*
  * 职责链模式
  *
@@ -12,60 +13,60 @@
 
 abstract class Handler
 {
-	protected $_handler = null;
+    protected $_handler = null;
 
-	public function setSuccessor($handler)
-	{
-		$this->_handler = $handler;
-	}
+    public function setSuccessor($handler)
+    {
+        $this->_handler = $handler;
+    }
 
-	abstract function handleRequest($request);
+    abstract function handleRequest($request);
 }
 
 class ConcreteHandlerZero extends Handler
 {
-	public function handleRequest($request)
-	{
-		if ($request == 0) {
-			echo '0<br/>';
-		} else {
-			$this->_handler->handleRequest($request);
-		}
-	}
+    public function handleRequest($request)
+    {
+        if ($request == 0) {
+            echo '0<br/>';
+        } else {
+            $this->_handler->handleRequest($request);
+        }
+    }
 }
 
 class ConcreteHandlerOdd extends Handler
 {
-	public function handleRequest($request)
-	{
-		if ($request % 2) {
-			echo $request . 'is odd<br/>';
-		} else {
-			echo $request . 'is even<br/>';
-		}
-	}
+    public function handleRequest($request)
+    {
+        if ($request % 2) {
+            echo $request . 'is odd<br/>';
+        } else {
+            echo $request . 'is even<br/>';
+        }
+    }
 }
 
 class ConcreteHandlerEven extends Handler
 {
-	public function handleRequest($request)
-	{
-		if (!$request % 2) {
-			echo $request . 'is even<br/>';
-		} else {
-			$this->_handler->handleRequest($request);
-		}
-	}
+    public function handleRequest($request)
+    {
+        if (!$request % 2) {
+            echo $request . 'is even<br/>';
+        } else {
+            $this->_handler->handleRequest($request);
+        }
+    }
 }
 
 //实例一下
 $objZeroHander = new ConcreteHandlerZero();
 $objEvenHander = new ConcreteHandlerEven();
-$objOddHander = new ConcreteHandlerOdd();
+$objOddHander  = new ConcreteHandlerOdd();
 $objZeroHander->setSuccessor($objEvenHander);
 $objEvenHander->setSuccessor($objOddHander);
 
 
 foreach (array(21, 3, 42, 51, 0, 2) as $row) {
-	$objZeroHander->handleRequest($row);
+    $objZeroHander->handleRequest($row);
 }

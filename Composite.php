@@ -4,6 +4,7 @@
  * User: coder meng
  * Date: 2016/9/6 14:12
  */
+
 /*
  * 组合模式
  *
@@ -12,89 +13,89 @@
 
 abstract class MenuComponent
 {
-	public function add($component)
-	{
-	}
+    public function add($component)
+    {
+    }
 
-	public function remove($component)
-	{
-	}
+    public function remove($component)
+    {
+    }
 
-	public function getName()
-	{
-	}
+    public function getName()
+    {
+    }
 
-	public function getUrl()
-	{
-	}
+    public function getUrl()
+    {
+    }
 
-	public function display()
-	{
-	}
+    public function display()
+    {
+    }
 }
 
 class Menu extends MenuComponent
 {
-	private $_items = array();
-	private $_name = null;
+    private $_items = array();
+    private $_name = null;
 
-	public function __construct($name)
-	{
-		$this->_name = $name;
-	}
+    public function __construct($name)
+    {
+        $this->_name = $name;
+    }
 
-	public function add($component)
-	{
-		$this->_items[] = $component;
-	}
+    public function add($component)
+    {
+        $this->_items[] = $component;
+    }
 
-	public function remove($component)
-	{
-		$key = array_search($component, $this->_items);
-		if ($key !== false) {
-			unset($this->_items[$key]);
-		}
-	}
+    public function remove($component)
+    {
+        $key = array_search($component, $this->_items);
+        if ($key !== false) {
+            unset($this->_items[$key]);
+        }
+    }
 
-	public function display()
-	{
-		echo '--' . $this->_name . '------<br/>';
-		foreach ($this->_items as $item) {
-			$item->display();
-		}
-	}
+    public function display()
+    {
+        echo '--' . $this->_name . '------<br/>';
+        foreach ($this->_items as $item) {
+            $item->display();
+        }
+    }
 }
 
 class Item extends MenuComponent
 {
-	private $_name = null;
-	private $_url = null;
+    private $_name = null;
+    private $_url = null;
 
-	public function __construct($name, $url)
-	{
-		$this->_name = $name;
-		$this->_url = $url;
-	}
+    public function __construct($name, $url)
+    {
+        $this->_name = $name;
+        $this->_url  = $url;
+    }
 
-	public function display()
-	{
-		echo $this->_name . '#' . $this->_url . '<br/>';
-	}
+    public function display()
+    {
+        echo $this->_name . '#' . $this->_url . '<br/>';
+    }
 }
 
 class Client
 {
-	private $_menu = null;
+    private $_menu = null;
 
-	public function setMenu($menu)
-	{
-		$this->_menu = $menu;
-	}
+    public function setMenu($menu)
+    {
+        $this->_menu = $menu;
+    }
 
-	public function displayMenu()
-	{
-		$this->_menu->display();
-	}
+    public function displayMenu()
+    {
+        $this->_menu->display();
+    }
 }
 
 //实例一下   创建menu
